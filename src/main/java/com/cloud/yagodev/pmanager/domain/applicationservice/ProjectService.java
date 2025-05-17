@@ -6,10 +6,12 @@ import com.cloud.yagodev.pmanager.domain.repository.ProjectRepository;
 import com.cloud.yagodev.pmanager.infrastructure.dto.SaveProjectDataDTO;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ProjectService {
 
     private final ProjectRepository projectRepository;
@@ -24,6 +26,8 @@ public class ProjectService {
                 .finalDate(saveProjectDataDTO.getFinalDate())
                 .status(ProjectStatus.PENDING)
                 .build();
+        log.info("Projeto criado: {}", project);
         return projectRepository.save(project);
+
     }
 }
